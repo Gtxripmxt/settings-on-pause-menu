@@ -6,8 +6,8 @@
 using namespace geode::prelude;
 
 class $modify(MyPauseLayer, PauseLayer) {
-    bool init(bool idk) {
-        if (!PauseLayer::init(idk)) return false;
+    void onEnter() {
+        PauseLayer::onEnter(); // call base method first
 
         // Create the button
         auto btn = CCMenuItemSpriteExtra::create(
@@ -16,16 +16,15 @@ class $modify(MyPauseLayer, PauseLayer) {
             menu_selector(MyPauseLayer::onOptionsButton)
         );
 
-        // Position on the right side
+        // Position it on the right side of the screen
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        btn->setPosition({winSize.width - 50.0f, winSize.height / 2});
+        btn->setPosition({winSize.width - 60.0f, winSize.height / 2});
 
+        // Add it to a new menu
         auto menu = CCMenu::create();
         menu->addChild(btn);
         menu->setPosition(CCPointZero);
         this->addChild(menu);
-
-        return true;
     }
 
     void onOptionsButton(CCObject*) {
