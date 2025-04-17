@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/ui/TextButton.hpp>
+#include <Geode/ui/GeodeUI.hpp>
+#include <Geode/utils/cocos.hpp>
 
 using namespace geode::prelude;
 
