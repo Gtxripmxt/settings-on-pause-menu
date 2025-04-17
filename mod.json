@@ -11,4 +11,9 @@
 	"version": "v1.0.0",
 	"developer": "gtxripmxt",
 	"description": "adds a button in the pause menu that opens the settings menu"
+	"resources": {
+        "sprites": [
+            "resources/button.png"
+        ]
+    }
 }
