@@ -1,45 +1,34 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/EditorPauseLayer.hpp>
-#include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/PlayerObject.hpp>
-#include <Geode/ui/GeodeUI.hpp>
-#include <Geode/utils/cocos.hpp>
+#include <Geode/ui/TextButton.hpp>
 
 using namespace geode::prelude;
 
-class $modify(PauseWithImageButton, PauseLayer) {
-public:
-    void customSetup() override;
-    void onSettingsButton(cocos2d::CCObject*);
-};
+class $modify(MyPauseLayer, PauseLayer) {
+    bool init(bool idk) {
+        if (!PauseLayer::init(idk)) return false;
 
-void PauseWithImageButton::customSetup() {
-    PauseLayer::customSetup();
+        // Create the button
+        auto btn = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create("Options", 0, false, "goldFont.fnt", "GJ_button_01.png", 40.0f, 1.0f),
+            this,
+            menu_selector(MyPauseLayer::onOptionsButton)
+        );
 
-    auto sprite = cocos2d::CCSprite::create("button.png");
-    if (!sprite) {
-        log::error("Failed to load 'button.png'");
-        return;
+        // Position on the right side
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
+        btn->setPosition({winSize.width - 50.0f, winSize.height / 2});
+
+        auto menu = CCMenu::create();
+        menu->addChild(btn);
+        menu->setPosition(CCPointZero);
+        this->addChild(menu);
+
+        return true;
     }
 
-    auto button = CCMenuItemSpriteExtra::create(
-        sprite,
-        sprite,
-        this,
-        menu_selector(PauseWithImageButton::onSettingsButton) // whowza
-    );
-
-    auto winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
-    button->setPosition({ winSize.width - 40.f, winSize.height / 2 });
-
-    auto menu = cocos2d::CCMenu::create();
-    menu->addChild(button);
-    menu->setPosition({ 0, 0 });
-    this->addChild(menu);
-}
-
-void onOptionsButton(CCObject*) {
-    auto optionsLayer = OptionsLayer::create();
-    CCDirector::sharedDirector()->getRunningScene()->addChild(optionsLayer, 1000);
-}
+    void onOptionsButton(CCObject*) {
+        auto optionsLayer = OptionsLayer::create();
+        CCDirector::sharedDirector()->getRunningScene()->addChild(optionsLayer, 1000);
+    }
+};
