@@ -22,6 +22,7 @@ void PauseWithImageButton::customSetup() {
         log::error("Failed to load 'button.png'");
         return;
     }
+}
 
     auto button = CCMenuItemSpriteExtra::create(
         sprite,
@@ -47,3 +48,5 @@ if (auto* options = OptionsLayer::create()) {
                 scene->addChild(options, zOrder + 1);
                 options->showLayer(false);
 }
+}
+
