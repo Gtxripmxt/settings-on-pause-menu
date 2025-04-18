@@ -22,7 +22,6 @@ void PauseWithImageButton::customSetup() {
         log::error("Failed to load 'button.png'");
         return;
     }
-}
 
     auto button = CCMenuItemSpriteExtra::create(
         sprite,
@@ -41,12 +40,11 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-if (auto* options = OptionsLayer::create()) {
+ if (auto* options = OptionsLayer::create()) {
                 auto scene = utils::get<cocos2d::CCScene>();
                 if (!scene) return;
                 auto zOrder = scene->getHighestChildZ();
                 scene->addChild(options, zOrder + 1);
                 options->showLayer(false);
+            }
 }
-}
-
