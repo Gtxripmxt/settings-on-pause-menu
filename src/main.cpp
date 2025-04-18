@@ -40,5 +40,5 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-        OptionsLayer::create());
+        OptionsLayer::create();
 }
