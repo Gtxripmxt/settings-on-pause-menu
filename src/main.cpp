@@ -42,5 +42,5 @@ void PauseWithImageButton::customSetup() {
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
  auto options = OptionsLayer::create();
-    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.2f, options));
+    CCDirector::sharedDirector()->getRunningScene()->addChild(options, 999);
 }
