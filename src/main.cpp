@@ -40,7 +40,6 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-        OptionsLayer::create();
-        scene->addChild(options, zOrder + 1);
-                options->showLayer(false);
+        auto options = OptionsLayer::create();
+        options->show();
 }
