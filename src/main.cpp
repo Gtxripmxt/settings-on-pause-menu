@@ -18,7 +18,11 @@ public:
 void PauseWithImageButton::customSetup() {
     PauseLayer::customSetup();
 
-    auto btnSprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn02_001.png");
+    auto sprite = cocos2d::CCSprite::create("GJ_optionsBtn02_001.png");
+    if (!sprite) {
+        log::error("Failed to load 'GJ_optionsBtn02_001.png'");
+        return;
+    }
 
     auto button = CCMenuItemSpriteExtra::create(
         sprite,
