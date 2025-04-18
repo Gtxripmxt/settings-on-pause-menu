@@ -5,6 +5,7 @@
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/cocos.hpp>
+#include <Geode/ui/BasedButtonSprite.hpp>
 
 using namespace geode::prelude;
 
