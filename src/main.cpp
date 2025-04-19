@@ -1,46 +1,60 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/EditorPauseLayer.hpp>
-#include <Geode/modify/EndLevelLayer.hpp>
-#include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/PlayerObject.hpp>
-#include <Geode/ui/GeodeUI.hpp>
+#include <Geode/modify/LevelBrowserLayer.hpp>
+#include <Geode/loader/Mod.hpp>
+#include <Geode/utils/web.hpp>
+#include <Geode/utils/file.hpp>
 #include <Geode/utils/cocos.hpp>
-#include <Geode/ui/BasedButtonSprite.hpp>
+#include <Geode/binding/GJGameLevel.hpp>
+#include <Geode/binding/GJGarageLayer.hpp>
+#include <Geode/binding/LevelBrowserLayer.hpp>
+#include <Geode/binding/GJLocalLevelScore.hpp>
 
 using namespace geode::prelude;
 
-class $modify(PauseWithImageButton, PauseLayer) {
-public:
-    void customSetup() override;
-    void onSettingsButton(cocos2d::CCObject*);
-};
+class $modify(LevelBrowserLayerExport, LevelBrowserLayer) {
+    bool init(GJSearchObject* search) {
+        if (!LevelBrowserLayer::init(search)) return false;
 
-void PauseWithImageButton::customSetup() {
-    PauseLayer::customSetup();
+        // Add export button
+        auto exportBtn = CCMenuItemSpriteExtra::create(
+            CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png"),
+            this,
+            menu_selector(LevelBrowserLayerExport::onExportClicked)
+        );
 
-    auto sprite = cocos2d::CCSprite::create("GJ_optionsBtn02_001.png");
-    if (!sprite) {
-        log::error("Failed to load 'GJ_optionsBtn02_001.png'");
-        return;
+        exportBtn->setPosition({ this->getContentSize().width - 50.f, this->getContentSize().height - 50.f });
+
+        auto menu = this->getChildByIDRecursive<CCMenu>("level-browser-menu");
+        if (menu) {
+            menu->addChild(exportBtn);
+        }
+
+        return true;
     }
 
-    auto button = CCMenuItemSpriteExtra::create(
-        sprite,
-        sprite,
-        this,
-        menu_selector(PauseWithImageButton::onSettingsButton) // whowza
-    );
+    void onExportClicked(CCObject*) {
+        if (!m_list) return;
 
-    auto winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
-    button->setPosition({ winSize.width - 40.f, winSize.height / 2 });
+        // Get selected level
+        auto cell = static_cast<CustomListView*>(m_list)->getSelectedCell();
+        if (!cell) {
+            FLAlertLayer::create("Export Error", "No level selected.", "OK")->show();
+            return;
+        }
 
-    auto menu = cocos2d::CCMenu::create();
-    menu->addChild(button);
-    menu->setPosition({0, 0});
-    this->addChild(menu);
-}
+        auto level = static_cast<GJGameLevel*>(cell->m_entry);
+        if (!level) {
+            FLAlertLayer::create("Export Error", "Failed to get level data.", "OK")->show();
+            return;
+        }
 
-void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
- auto options = OptionsLayer::create();
-    CCDirector::sharedDirector()->getRunningScene()->addChild(options, 999);
-}
+        std::string gmdData = level->m_levelString;
+        std::string savePath = Mod::get()->getSaveDir() + "/" + std::to_string(level->m_levelID.value()) + "_" + level->m_levelName + ".gmd";
+
+        if (file::writeStringToFile(gmdData, savePath)) {
+            FLAlertLayer::create("Export Successful", "Level exported to mod's save files.", "OK")->show();
+        } else {
+            FLAlertLayer::create("Export Failed", "Could not write to file.", "OK")->show();
+        }
+    }
+};
