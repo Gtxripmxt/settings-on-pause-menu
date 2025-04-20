@@ -43,5 +43,5 @@ void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
     scene->addChild(options, zOrder);
     options->showLayer(false);
     }
-}
+};
 
