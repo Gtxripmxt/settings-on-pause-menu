@@ -3,7 +3,6 @@
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/cocos.hpp>
 #include <Geode/binding/OptionsLayer.hpp>
-#include <Geode/ext/cocos/CCMenuItemSpriteExtra.hpp>
 
 using namespace geode::prelude;
 
