@@ -36,12 +36,12 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-    auto options = OptionsLayer::create();
+       auto options = OptionsLayer::create();
     if (!options) return;
-    auto scene = utils::get<cocos2d::CCScene>();
+    auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene();
     if (!scene) return;
-    auto zOrder = scene->getHighestChildZ();
-    scene->addChild(options, zOrder + 1);
+    int zOrder = 1000;
+    scene->addChild(options, zOrder);
     options->showLayer(false);
     }
 }
