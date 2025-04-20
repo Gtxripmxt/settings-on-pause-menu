@@ -10,7 +10,6 @@ class $modify(PauseWithImageButton, PauseLayer) {
 public:
     void customSetup() override;
     void onSettingsButton(cocos2d::CCObject*);
-};
 
 void PauseWithImageButton::customSetup() {
     PauseLayer::customSetup();
@@ -45,3 +44,4 @@ void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
     options->showLayer(false);
     }
 }
+
