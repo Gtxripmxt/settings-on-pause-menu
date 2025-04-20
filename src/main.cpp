@@ -10,7 +10,6 @@ class $modify(PauseWithImageButton, PauseLayer) {
 public:
     void customSetup() override;
     void onSettingsButton(cocos2d::CCObject*);
-};
 
 void PauseWithImageButton::customSetup() {
     PauseLayer::customSetup();
@@ -32,7 +31,7 @@ void PauseWithImageButton::customSetup() {
     menu->setPosition({ 0, 0 });
 
     this->addChild(menu);
-}
+};
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
            auto options = OptionsLayer::create();
