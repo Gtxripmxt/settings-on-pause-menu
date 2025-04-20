@@ -2,6 +2,8 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/cocos.hpp>
+#include <Geode/binding/OptionsLayer.hpp>
+#include <Geode/ext/cocos/CCMenuItemSpriteExtra.hpp>
 
 using namespace geode::prelude;
 
@@ -15,6 +17,7 @@ void PauseWithImageButton::customSetup() {
     PauseLayer::customSetup();
 
     auto sprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
+    if (!sprite) return;
 
     auto button = CCMenuItemSpriteExtra::create(
         sprite,
@@ -34,11 +37,11 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-  if (auto* options = OptionsLayer::create()) {
-                auto scene = utils::get<cocos2d::CCScene>();
-                if (!scene) return;
-                auto zOrder = scene->getHighestChildZ();
-                scene->addChild(options, zOrder + 1);
-                options->showLayer(false);
-            }
+    if (auto* options = OptionsLayer::create()) {
+        auto scene = utils::get<cocos2d::CCScene>();
+        if (!scene) return;
+        auto zOrder = scene->getHighestChildZ();
+        scene->addChild(options, zOrder + 1);
+        options->showLayer(false);
+    }
 }
