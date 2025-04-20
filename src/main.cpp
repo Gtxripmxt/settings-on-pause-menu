@@ -36,7 +36,7 @@ void PauseWithImageButton::customSetup() {
 }
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-    if (auto* options = OptionsLayer::create()) {
+    OptionsLayer::create()
         auto scene = utils::get<cocos2d::CCScene>();
         if (!scene) return;
         auto zOrder = scene->getHighestChildZ();
