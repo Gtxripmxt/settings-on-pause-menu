@@ -10,12 +10,12 @@ class $modify(PauseWithImageButton, PauseLayer) {
 public:
     void customSetup() override;
     void onSettingsButton(cocos2d::CCObject*);
+};
 
 void PauseWithImageButton::customSetup() {
     PauseLayer::customSetup();
 
     auto sprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
-    if (!sprite) return;
 
     auto button = CCMenuItemSpriteExtra::create(
         sprite,
@@ -32,16 +32,15 @@ void PauseWithImageButton::customSetup() {
     menu->setPosition({ 0, 0 });
 
     this->addChild(menu);
-};
+}
 
 void PauseWithImageButton::onSettingsButton(cocos2d::CCObject*) {
-       auto options = OptionsLayer::create();
+           auto options = OptionsLayer::create();
     if (!options) return;
     auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene();
     if (!scene) return;
     int zOrder = 1000;
     scene->addChild(options, zOrder);
-    options->showLayer(false);
-    }
-};
-
+    options->showLayer(false);	
+            }
+}
