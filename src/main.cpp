@@ -10,13 +10,13 @@ public:
     void onSettingsButton(cocos2d::CCObject*);
 };
 
-void PauseWithImageButton::customSetup() {
+void MyPauseLayer::customSetup() {
     PauseLayer::customSetup();
 
     auto button = CCMenuItemSpriteExtra::create(
 			CCSprite::createWithSpriteFrameName("GJ_infoBtn_001.png"),
 			this,
-			menu_selector(MyPauseLayer::onInfoButton)
+			menu_selector(MyPauseLayer::onSettingsButton)
     );
 	auto menu = this->getChildByID("center-button-menu");
 	button->setID("settings-button"_spr);
