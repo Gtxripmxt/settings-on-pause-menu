@@ -10,7 +10,7 @@ public:
         PauseLayer::customSetup();
 
         auto button = CCMenuItemSpriteExtra::create(
-	    CCSprite::createWithSpriteFrameName("GJ_infoBtn_001.png"),
+	    CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png"),
 	    this,
 	    menu_selector(MyPauseLayer::onSettingsButton)
         );
