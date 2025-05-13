@@ -20,7 +20,7 @@ public:
 
 	menu->updateLayout();
     }
-    void MyPauseLayer::onSettingsButton(cocos2d::CCObject*) {
+    void onSettingsButton(cocos2d::CCObject*) {
         auto options = OptionsLayer::create();
         if (!options) return;
         auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene();
