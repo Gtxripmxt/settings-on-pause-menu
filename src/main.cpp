@@ -18,7 +18,7 @@ public:
 	menu->addChild(button);
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
-    button->setPosition({ winSize.width - 50.f, 50.f });
+    button->setPosition({ winSize.width - 10.f, 10.f });
 	menu->updateLayout();
     }
     void onSettingsButton(cocos2d::CCObject*) {
