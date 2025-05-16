@@ -1,6 +1,5 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/binding/OptionsLayer.hpp>
 
 using namespace geode::prelude;
 
