@@ -15,8 +15,9 @@ public:
 	    this,
 	    menu_selector(MyPauseLayer::onSettingsButton)
         );
-	auto menu = this->getChildByID("center-button-menu");
-	menu->addChild(button);
+        auto menu = cocos2d::CCMenu::create();
+        menu->addChild(button);
+        menu->setPosition({ 0, 0 });
 
     }
     void onSettingsButton(cocos2d::CCObject*) {
