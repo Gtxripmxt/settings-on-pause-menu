@@ -20,6 +20,7 @@ public:
         auto menu = cocos2d::CCMenu::create();
         menu->addChild(button);
         menu->setPosition({ 0, 0 });
+	this->addChild(menu);
 
     }
     void onSettingsButton(cocos2d::CCObject*) {
