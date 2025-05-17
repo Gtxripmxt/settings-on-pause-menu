@@ -13,13 +13,11 @@ public:
 	    this,
 	    menu_selector(MyPauseLayer::onSettingsButton)
         );
+	button->setPosition(winSize.width, winSize.height / 2);
+	
 	auto menu = this->getChildByID("center-button-menu");
-	button->setID("settings-button"_spr);
 	menu->addChild(button);
 
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
-    button->setPosition({ winSize.width - 10.f, 10.f });
-	menu->updateLayout();
     }
     void onSettingsButton(cocos2d::CCObject*) {
         auto options = OptionsLayer::create();
