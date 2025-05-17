@@ -15,6 +15,8 @@ public:
 	    this,
 	    menu_selector(MyPauseLayer::onSettingsButton)
         );
+	button->setPosition(winSize.width, winSize.height / 2);
+	
         auto menu = cocos2d::CCMenu::create();
         menu->addChild(button);
         menu->setPosition({ 0, 0 });
